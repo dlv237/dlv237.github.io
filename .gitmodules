@@ -1,3 +1,9 @@
 [submodule "LRWebServices_backend"]
 	path = LRWebServices_backend
 	url = https://github.com/IIC2513/LRWebServices_backend
+[submodule "Proyectos PUC/WEB/LRWebServices_backend"]
+	path = Proyectos PUC/WEB/LRWebServices_backend
+	url = https://github.com/IIC2513/LRWebServices_backend
+[submodule "Proyectos PUC/WEB/LRWebServices_frontend"]
+	path = Proyectos PUC/WEB/LRWebServices_frontend
+	url = https://github.com/IIC2513/LRWebServices_frontend
