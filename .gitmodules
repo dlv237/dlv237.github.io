@@ -1,0 +1,3 @@
+[submodule "LRWebServices_backend"]
+	path = LRWebServices_backend
+	url = https://github.com/IIC2513/LRWebServices_backend
