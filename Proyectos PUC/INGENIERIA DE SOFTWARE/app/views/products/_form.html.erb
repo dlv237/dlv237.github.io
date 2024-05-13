@@ -1,0 +1,93 @@
+
+<%= form_with(model: product, html: { class: "product-form" }) do |form| %>
+  <% if product.errors.any? %>
+    <div class="error-messages">
+      <h2><%= pluralize(product.errors.count, "error") %> No se puede agregar este producto:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class = "box">
+  <div class="form-field">
+    <p>Nombre Producto</p>
+    <div class="control has-icons-left has-icons-right">
+      <%= form.text_field :nombre, class: "input", autocomplete: "Nombre producto", placeholder: "Producto" %>
+      <span class="icon is-small is-left">
+        <i class="bi bi-person"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="bi bi-check"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <p>Descripcion</p>
+    <%= form.text_field :descripcion , class: "input is-large", autocomplete: "Descripcion de su producto"%>
+  </div>
+
+
+  <div class="control has-icons-left">
+    <p> Categoria </p>
+    <div class="select">
+      <%= form.collection_select(:categoria_id, Categoria.all, :id, :nombre, prompt: "Seleccione una categoria") %>
+    <div class="icon is-small is-left">
+    <i class="bi bi-globe"></i>
+  </div>
+</div>
+
+<div class="control has-icons-left">
+    <p> Plataforma </p>
+    <div class="select">
+      <%= form.collection_select(:plataforma_id, Plataforma.all, :id, :nombre, prompt: "Seleccione la plataforma") %>
+    <div class="icon is-small is-left">
+    <i class="bi bi-globe"></i>
+  </div>
+</div>
+
+ <div class="field">
+    <p>Imagen del producto</p>
+    <div class="file has-name is-fullwidth">
+      <label class="file-label">
+        <%= form.file_field :image, class: "file-input", id: "image" %>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Elige un archivo
+          </span>
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Aquí agregar la previsualización de la imagen -->
+  <div class="field has-text-centered">
+    <p>Previsualización de la imagen</p>
+    <div class="is-flex">
+      <figure class="image is-128x128">
+        <!-- La imagen se mostrará aquí -->
+
+        <img class="is-rounded" id="image-preview" src="" alt="Imagen">
+      </figure>
+    </div>
+  </div>
+  <br><br>
+  </div>
+   </div>
+
+  <%= form.submit "Guardar", class: "button is-primary" %>
+<% end %>
+
+<script>
+  document.querySelector('#image').addEventListener('change', function () {
+    var preview = document.querySelector('#image-preview');
+    preview.src = URL.createObjectURL(this.files[0]);
+  });
+</script>

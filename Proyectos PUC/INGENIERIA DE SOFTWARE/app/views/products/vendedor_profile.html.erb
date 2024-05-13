@@ -1,0 +1,73 @@
+<div class="main-banner">
+  <div class="product-form">
+<h1 class = "titleee">Nombre del Vendedor: <%= @vendedor.nombre %></h1>
+<h1 class = "subtitle"><b>Ubicación:</b> <%= @vendedor.region.nombre %></h1>
+
+<style>
+table {
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 10px;
+  border-radius: 10px; /* Ajusta este valor según tu preferencia */
+}
+
+td, th {
+  text-align: center;
+  padding: 10px;
+}
+</style>
+</br>
+<h2 class="titleeee">Productos del Vendedor</h2>
+<table id="products-table">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each_slice(3) do |products_row| %>
+      <tr>
+        <% products_row.each do |product| %>
+          <td>
+            <%= render product %>
+            <br>
+            <div class="buttons">
+            <%= link_to "Ver Videojuego", product, class: "button is-primary" %>
+            <% unless product.estado == 'vendido' || product.usuario == current_usuario %>
+              <br><br>
+              <%= link_to "Realizar Solicitud", new_solicitud_path(product), class: "button is-primary is-selected" %>
+            <% end %>
+            <div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+    <h2 class="titleeee">Calificaciones del Vendedor</h2>
+    </br>
+    <table class="table" id="tabla-califications">
+      <thead>
+        <tr>
+          <th>Usuario Calificador</th>
+          <th>Puntuación</th>
+          <th>Mensaje</th>
+          <th>Nombre del Videojuego</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @califications.each do |calification| %>
+          <tr>
+            <td><%= Usuario.find(calification.usuario_calificador_id).nombre %></td>
+            <td><%= calification.puntuacion %></td>
+            <td><%= calification.mensaje %></td>
+            <td><%= Product.find(calification.product_id).nombre %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+</div>
+
+</div>

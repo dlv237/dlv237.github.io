@@ -1,0 +1,44 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title"> Solicitudes recibidas </h1>
+    <% @solicitudes_recibidas.each do |solicitud| %>
+      <div class="box">
+        <p class="subtitle is-5">Solicitud de: <%= Usuario.find(solicitud.producto_ofrecido.id_usuario).nombre %></p>
+        <p>Producto Ofrecido: <%= solicitud.producto_ofrecido.nombre %></p>
+        <p>Producto Solicitado: <%= solicitud.producto_solicitado.nombre %></p>
+        <p>Mensaje: <%= solicitud.mensaje %></p>
+        </br>
+        <% if solicitud.estado == 0 %>
+          <div class="buttons">
+            <%= button_to "Aceptar", accept_solicitud_path(solicitud, state: 1), method: :patch, class: 'button is-success' %>
+            <%= button_to "Rechazar", reject_solicitud_path(solicitud, state: -1), method: :patch, class: 'button is-danger' %>
+          </div>
+        <% else %>
+          <span class="tag is-large <%= solicitud.estado == 1 ? 'is-success' : solicitud.estado == -1 ? 'is-danger' : 'is-warning' %>">
+            <%= solicitud.estado == 1 ? 'Aceptada' : solicitud.estado == -1 ? 'Rechazada' : 'Pendiente' %>
+            </span>
+            <% if solicitud.estado == 1 %>
+              <a class="button is-primary" href="/califications/new?usuario_calificado_id=<%= solicitud.producto_ofrecido.id_usuario %>&usuario_calificador_id=<%= current_usuario.id %>&producto_id=<%= solicitud.producto_ofrecido.id %>">Calificar Vendedor</a>
+            <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <br>
+    <h1 class="title">Solicitudes enviadas</h1>
+    <% @solicitudes_enviadas.each do |solicitud| %>
+      <div class="box">
+        <p class="subtitle is-5">Solicitud de: <%= Usuario.find(solicitud.producto_ofrecido.id_usuario).nombre %></p>
+        <p>Videojuego ofrecido: <%= solicitud.producto_ofrecido.nombre %></p>
+        <p>Videojuego solicitado: <%= solicitud.producto_solicitado.nombre %></p>
+        <p>Mensaje: <%= solicitud.mensaje %></p>
+        <br>
+        <span class="tag is-large <%= solicitud.estado == 1 ? 'is-success' : solicitud.estado == -1 ? 'is-danger' : 'is-warning' %>">
+          <%= solicitud.estado == 1 ? 'Aceptada' : solicitud.estado == -1 ? 'Rechazada' : 'Pendiente' %>
+          </span>
+          <% if solicitud.estado == 1 %>
+  <a class="button is-primary" href="/califications/new?usuario_calificado_id=<%= solicitud.producto_solicitado.id_usuario %>&usuario_calificador_id=<%= solicitud.producto_ofrecido.id_usuario %>&producto_id=<%= solicitud.producto_ofrecido.id %>">Calificar Vendedor</a>
+<% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

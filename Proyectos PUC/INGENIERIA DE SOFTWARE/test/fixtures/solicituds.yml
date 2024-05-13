@@ -1,0 +1,7 @@
+solicitud_one:
+  producto_ofrecido: product_one
+  producto_solicitado: product_two
+  estado: 0
+  mensaje: Sale su trade?
+  created_at: 2023-1-1
+  updated_at: 2023-2-2

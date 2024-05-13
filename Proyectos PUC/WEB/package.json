@@ -1,0 +1,32 @@
+{
+  "name": "LRWebServices_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IIC2513/LRWebServices_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IIC2513/LRWebServices_backend/issues"
+  },
+  "homepage": "https://github.com/IIC2513/LRWebServices_backend#readme",
+  "dependencies": {
+    "koa": "^2.15.3",
+    "koa-bodyparser": "^4.4.1",
+    "koa-router": "^12.0.1",
+    "koa-send": "^5.0.1",
+    "koa-static": "^5.0.0",
+    "pg": "^8.11.5",
+    "pg-hstore": "^2.3.4",
+    "pg-promise": "^11.6.0",
+    "router": "^1.3.8",
+    "sequelize": "^6.37.3"
+  }
+}

@@ -1,0 +1,131 @@
+<div class="main-banner">
+  <div class="product-form">
+  <p style="color: green"><%= notice %></p>
+
+  <a class="button is-primary" href="products/new"> Crear producto</a>
+  <br>
+  <style>
+  .filter-forms {
+    display: flex; 
+    align-items: center; 
+  }
+  .filter-forms form {
+    margin-right: 10px;
+  }
+</style>
+
+</br>
+<div class="filter-forms">
+ <form id="category-filter-form" class="field">
+   <label for="category-filter" class="label">Filtrar por Categoría:</label>
+   <div class="control">
+     <div class="select">
+       <select id="category-filter">
+         <option value="all">Todas</option>
+         <% @categorias.each do |categoria| %>
+           <option value="<%= categoria.id %>"><%= categoria.nombre %></option>
+         <% end %>
+       </select>
+     </div>
+   </div>
+ </form>
+
+ <form id="platform-filter-form" class="field">
+   <label for="platform-filter" class="label">Filtrar por Plataforma:</label>
+   <div class="control">
+     <div class="select">
+       <select id="platform-filter">
+         <option value="all">Todas</option>
+         <% @plataformas.each do |plataforma| %>
+           <option value="<%= plataforma.id %>"><%= plataforma.nombre %></option>
+         <% end %>
+       </select>
+     </div>
+   </div>
+ </form>
+
+ <form id="region-filter-form" class="field">
+   <label for="region-filter" class="label">Filtrar por Región:</label>
+   <div class="control">
+     <div class="select">
+       <select id="region-filter">
+         <option value="all">Todas</option>
+         <% @regions.each do |region| %>
+           <option value="<%= region.id %>"><%= region.nombre %></option>
+         <% end %>
+       </select>
+     </div>
+   </div>
+ </form>
+
+  <form id="search-form" class="field" style="margin-bottom: 0.75rem">
+  <label for="search" class="label">Busqueda:</label>
+  <div class="control has-icons-left">
+    <input id="search" type="text" class="input" placeholder="Buscar producto por nombre">
+    <span class="icon is-small is-left">
+      <i class="bi bi-search"></i>
+    </span>
+  </div>
+ </form>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    $("#category-filter, #platform-filter, #region-filter, #search").on('change keyup', function () {
+      var selectedCategory = $("#category-filter").val();
+      var selectedPlatform = $("#platform-filter").val();
+      var selectedRegion = $("#region-filter").val();
+      var searchName = $("#search").val();
+      $.ajax({
+        url: "/products/filter",
+        type: "GET",
+        data: { categoria_id: selectedCategory, plataforma_id: selectedPlatform, region_id: selectedRegion, search: searchName },
+        dataType: 'html',
+        success: function (data) {
+          $("#products-table tbody").html(data);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  #products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  #products-table th, #products-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+</style>
+
+<table id="products-table">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product.each_slice(3) do |products_row| %>
+      <tr>
+        <% products_row.each do |product| %>
+          <td>
+            <%= render product %>
+            <br>
+            <div class="buttons">
+            <%= link_to "Ver Videojuego", product, class: "button is-primary" %>
+            <% unless product.estado == 'vendido' || product.usuario == current_usuario %>
+              <br><br>
+              <%= link_to "Realizar Solicitud", new_solicitud_path(product), class: "button is-primary" %>
+            <% end %>
+            <div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

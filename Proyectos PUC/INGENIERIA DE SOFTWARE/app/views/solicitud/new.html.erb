@@ -1,0 +1,23 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title"> Solicitud para <%= @producto_solicitado.nombre%></h1>
+
+        <%= form_with(model: @solicitud, url: create_solicitud_path, class: 'box') do |form| %>
+        <%= form.hidden_field :producto_solicitado_id, value: @producto_solicitado.id %>
+
+        <div class="field">
+            <%= form.label "Selecciona un producto para ofrecer:", class: 'label' %>
+            <%= form.collection_select :producto_ofrecido_id, @productos_usuario.where(estado: 'publicado'), :id, :nombre,  {}, {class: 'select'} %>
+        </div>
+      
+        <div class="field">
+            <%= form.label :mensaje, "Mensaje", class: 'label' %>
+            <%= form.text_area :mensaje, class: 'textArea'%>
+        </div>
+
+      <div class="field">
+            <%= form.submit "Realizar Solicitud", class: "button is-primary" %>
+        </div>
+        <% end %>
+    </div>
+</section>

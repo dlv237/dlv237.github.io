@@ -1,0 +1,8 @@
+calification_one:
+  usuario_calificador: usuario_one
+  usuario_calificado: usuario_two
+  puntuacion: 5
+  mensaje: Bueno
+  product: product_one
+  created_at: 2023-1-1
+  updated_at: 2023-2-2

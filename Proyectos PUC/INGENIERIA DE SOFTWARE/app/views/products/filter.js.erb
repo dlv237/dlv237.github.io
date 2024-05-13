@@ -1,0 +1,24 @@
+# app/views/products/filter.js.erb
+<% if @product.any? %>
+    <% @product.each_slice(3) do |products_row| %>
+      <tr>
+        <% products_row.each do |product| %>
+          <td>
+            <%= render product %>
+            <br>
+            <div class="buttons">
+            <%= link_to "Ver Videojuego", product, class: "button is-primary" %>
+            <% unless product.estado == 'vendido' || product.usuario == current_usuario %>
+              <br><br>
+              <%= link_to "Realizar Solicitud", new_solicitud_path(product), class: "button is-primary" %>
+            <% end %>
+            <div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+<% else %>
+  <tr>
+    <td colspan="7">No se encontraron productos.</td>
+  </tr>
+<% end %>

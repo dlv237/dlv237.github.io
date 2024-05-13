@@ -1,0 +1,114 @@
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-half">
+        <p class="titlee">Nueva cuenta</p>
+        <p class="subtitle-product ">Por favor rellene todas las casillas</p>
+        <div class="content">
+
+          <div class="field">
+            <p class= "subtitle-product" > Usuario</p>
+            <p class="control has-icons-left has-icons-right">
+              <%= f.text_field :nombre, class: "input", autocomplete: "Nombre Usuario", placeholder: "Usuario" %>
+              <span class="icon is-small is-left">
+                <i class="bi bi-person"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="bi bi-check"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="field">
+            <p class= "subtitle-product" > Email </p>
+            <p class="control has-icons-left has-icons-right">
+              <%= f.text_field :email, class: "input", placeholder: "Email", autocomplete: "email" %>
+              <span class="icon is-small is-left">
+                <i class="bi bi-envelope"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="control has-icons-left">
+            <p class= "subtitle-product" > Region </p>
+            <div class="select">
+              <%= f.collection_select(:region_id, Region.all, :id, :nombre, prompt: "Seleccione una región") %>
+            <span class="icon is-small is-left">
+                <i class="bi bi-globe"></i>
+              </span>
+          </div>
+        </div>
+
+
+          <div class="field">
+            <p class= "subtitle-product" > Contraseña </p>
+              <% if @minimum_password_length %>
+              <em class= "subtitle-product" >(<%= @minimum_password_length %> caracteres minimos)</em>
+              <% end %>
+              <p class="control has-icons-left">
+              <%= f.password_field :password, autocomplete: "new-password" , class: "input", placeholder: "Contraseña"%>
+              <span class="icon is-small is-left">
+                <i class="bi bi-lock"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="field">
+            <p class= "subtitle-product" > Confirmacion de contraseña </p>
+            <p class="control has-icons-left">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "input", placeholder: "Confirmacion contraseña"%>
+              <span class="icon is-small is-left">
+                <i class="bi bi-lock"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="field">
+            <p class= "subtitle-product" >Imagen de Usuario</p>
+            <div class="file has-name is-fullwidth">
+              <label class="file-label">
+                <%= f.file_field :avatar, class: "file-input", id: "avatar" %>
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    Elige un archivo
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Aquí agregar la previsualización de la imagen -->
+          <div class="field has-text-centered">
+            <p class= "subtitle-product" >Previsualización de la imagen</p>
+            <div class="is-flex">
+              <figure class="imagen-producto">
+                <!-- La imagen se mostrará aquí -->
+
+                <img class="is-rounded" id="image-preview" src="">
+              </figure>
+            </div>
+          </div>
+          <br><br>
+          <div class="actions">
+            <%= f.submit "Registrarse", class: "button is-primary" %>
+          </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelector('#avatar').addEventListener('change', function () {
+    var preview = document.querySelector('#image-preview');
+    preview.src = URL.createObjectURL(this.files[0]);
+  });
+</script>

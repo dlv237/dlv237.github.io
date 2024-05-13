@@ -1,0 +1,25 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title"> Calificar al vendedor <%= @usuario_calificado.nombre %></h1>
+
+        <%= form_with(model: @calification, url: product_califications_path(product_id: @product.id, usuario_calificado_id: @usuario_calificado.id, usuario_calificador_id: @usuario_calificador.id), method: 'post', class: 'box') do |form| %>
+            <%= form.hidden_field :usuario_calificado_id, value: @usuario_calificado.id %>
+            <%= form.hidden_field :usuario_calificador_id, value: @usuario_calificador.id %>
+            <%= form.hidden_field :product_id, value: @product.id %>
+
+            <div class="field">
+                <%= form.label :puntuación, "Puntuación", class: 'label' %>
+                <%= form.number_field :puntuacion, in: 1..10, class: 'input' %>
+            </div>
+
+            <div class="field">
+                <%= form.label :mensaje, "Mensaje", class: 'label' %>
+                <%= form.text_area :mensaje, class: 'textarea' %>
+            </div>
+
+            <div class="field">
+                <%= form.submit "Enviar Calificación", class: "button is-primary" %>
+            </div>
+        <% end %>
+    </div>
+</section>

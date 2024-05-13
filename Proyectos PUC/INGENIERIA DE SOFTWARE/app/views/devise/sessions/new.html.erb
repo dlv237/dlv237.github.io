@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <% if resource_name.to_s == "usuario" %>
+        <h1 class="title ">
+          Bienvenido!
+        </h1>
+        <h2 class="subtitle-product ">
+          Inicia sesión para continuar
+        </h2>
+        <br>
+      <% end %>
+      <% if resource_name.to_s == "admin" %>
+        <h1 class="subtitle">
+          Admin Login
+        </h1>
+      <% end %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'box') do |f| %>
+        <div class="field">
+          <%= f.label :email, class: 'subtitle-product ' %>
+          <div class="control has-icons-left">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input', placeholder: "ejemplo@email.com" %>
+            <span class="icon is-small is-left">
+              <i class="bi bi-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+      <div class="field">
+        <%= f.label :password, class: 'subtitle-product' %>
+        <div class="control has-icons-left">
+          <%= f.password_field :password, autocomplete: "current-password", type: "password", class: "input", placeholder: "*******" %>
+          <span class="icon is-small is-left">
+            <i class="bi bi-lock"></i>
+          </span>
+        </div>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <div class="control">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, class: "litle" %>
+          </div>
+        </div>
+      <% end %>
+
+        <div class="buttons">
+
+          <%= f.submit "Iniciar Sesion", class: "button is-primary"%>
+
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+message_one:
+  usuario: usuario_one
+  room: room_one
+  body: Hello!
+  read: false
+  created_at: 2023-1-1
+  updated_at: 2023-2-2

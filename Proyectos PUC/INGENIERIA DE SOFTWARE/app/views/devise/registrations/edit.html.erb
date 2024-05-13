@@ -1,0 +1,78 @@
+<div class="tile is-parent img-welcome">
+  <article class="tile is-child ">
+        </article>
+
+        <article class="tile is-child notification is-5">
+      <h2 class="subtitle">Editar <%= resource_name.to_s.humanize %></h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="content">
+        <div class="field">
+          <%= f.label :email, class: "label" %>
+          <div class="control has-icons-left">
+            <%= f.email_field :email, autofocus: true, class: 'input', style: "width: 70%"%>
+            <span class="icon is-small is-left">
+              <i class="bi bi-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+        
+        <div class="field">
+          <%= f.label :password, class: "label" %>
+          <div class="control has-icons-left">
+            <%= f.password_field :password, autocomplete: "new-password", class: "input", style:"width: 70%", placeholder: "En blanco si no se desea cambiar" %>
+            <span class="icon is-small is-left">
+              <i class="bi bi-lock"></i>
+            </span>
+          </div>
+          <% if @minimum_password_length %>
+            <br />
+            <em><%= @minimum_password_length %> caracteres minimo</em>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, class: "label" %>
+          <div class="control has-icons-left">
+          <%= f.password_field :password_confirmation, class: "input", style: "width: 70%" %>
+            <span class="icon is-small is-left">
+              <i class="bi bi-lock"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.label :current_password, class: "label" %> 
+          <div class="control has-icons-left">
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "input", style: "width: 70%" %>
+            <span class="icon is-small is-left">
+              <i class="bi bi-lock"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <div class="control">
+          <%= f.submit "Actualizar", class: "button is-primary" %>
+          </div>
+        </div>
+      <% end %>
+
+      <br>
+      <h3 class="label">Cancelar cuenta</h3>
+
+      <div> 
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "button is-primary" %>
+      </div>
+      <br>
+      <%= link_to "Back", :back, class: "button" %>
+        </div>
+      </article>
+      <article class="tile is-child">
+        </article>
+  </div>
