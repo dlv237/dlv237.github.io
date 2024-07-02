@@ -18,7 +18,7 @@ function Register() {
     console.log(user);
     try {
       const response = await axios.post(
-        "http://localhost:3000/users",
+        "http://3.19.16.195:3000/users",
         user,
       );
       if (response.status === 200) {

@@ -11,7 +11,7 @@ function Logout() {
     const performLogout = async () => {
       try {
         if (user && user.email) {
-          await axios.patch(`http://localhost:3000/users/${user.email}`, {
+          await axios.patch(`http://3.19.16.195:3000/users/${user.email}`, {
             is_logged: false
           });
         }

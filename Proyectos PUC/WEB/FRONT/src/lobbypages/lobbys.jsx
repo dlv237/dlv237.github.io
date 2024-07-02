@@ -14,7 +14,7 @@ function LobbyList() {
   useEffect(() => {
     async function fetchLobbies() {
       try {
-        const response = await axios.get('http://localhost:3000/lobbys', { headers: { Authorization: `Bearer ${token}` } });
+        const response = await axios.get('http://3.19.16.195:3000/lobbys', { headers: { Authorization: `Bearer ${token}` } });
         setLobbies(response.data);
       } catch (error) {
         console.error('Error al obtener lobbies:', error);
@@ -26,7 +26,7 @@ function LobbyList() {
   const handleJoinLobby = async (lobbyId, password) => {
     try {
       setError(''); 
-      const response = await axios.post(`http://localhost:3000/lobbys/${lobbyId}/users`, { userId: user.id, password }
+      const response = await axios.post(`http://3.19.16.195:3000/lobbys/${lobbyId}/users`, { userId: user.id, password }
         ,{ headers: { Authorization: `Bearer ${token}` } }
       );
       console.log('Usuario agregado a lobby:', response.data);

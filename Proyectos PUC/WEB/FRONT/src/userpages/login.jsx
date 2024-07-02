@@ -17,7 +17,7 @@ function Login() {
     e.preventDefault();
     try {
       console.log(password);
-      const response = await axios.post(`http://localhost:3000/users/${email}`, {password: password});
+      const response = await axios.post(`http://3.19.16.195:3000/users/${email}`, {password: password});
       console.log(response.data)
       if (response.status === 200) {
         setUser(response.data.user); 

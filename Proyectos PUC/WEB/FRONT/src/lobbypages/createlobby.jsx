@@ -34,7 +34,7 @@ function CreateLobby() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/lobbys', formData
+      const response = await axios.post('http://3.19.16.195:3000/lobbys', formData
         , { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log('Lobby creado:', response.data);

@@ -67,8 +67,8 @@ const HexMap = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.post(`http://localhost:3000/game/${id}` ,{} ,{ headers: { Authorization: `Bearer ${token}` } });
-      const turnresponse = await axios.get(`http://localhost:3000/game/${id}/turn`, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await axios.post(`http://3.19.16.195:3000/game/${id}` ,{} ,{ headers: { Authorization: `Bearer ${token}` } });
+      const turnresponse = await axios.get(`http://3.19.16.195:3000/game/${id}/turn`, { headers: { Authorization: `Bearer ${token}` } });
       setMapData(response.data.map);
       setInventoryInfo(response.data.inventoryInfo);
       const userInTurn = turnresponse.data.userId === user.id;
@@ -105,7 +105,7 @@ const HexMap = () => {
 
   const handlePassTurnButton = async () => {
     try {
-      await axios.patch(`http://localhost:3000/game/${id}/passTurn`, { headers
+      await axios.patch(`http://3.19.16.195:3000/game/${id}/passTurn`, { headers
         : { Authorization: `Bearer ${token}` } });
       await fetchData();
     }
@@ -132,7 +132,7 @@ const HexMap = () => {
   const handleReinforce = async () => {
     if (selectedTerritory && selectedTerritory.userId === user.id) {
       try {
-        await axios.patch(`http://localhost:3000/game/${id}/reforze`, {
+        await axios.patch(`http://3.19.16.195:3000/game/${id}/reforze`, {
           userId: user.id,
           territoryId: selectedTerritory.territoryId,
           unit_count: reinforceUnits,
@@ -185,7 +185,7 @@ const HexMap = () => {
 
   const sendLog = async (mensaje) => {
     try {
-      const response = await axios.post(`http://localhost:3000/game/${id}/logs`, {
+      const response = await axios.post(`http://3.19.16.195:3000/game/${id}/logs`, {
         log: mensaje,
         lobbyId: id,
       }, { headers: { Authorization: `Bearer ${token}` } });
@@ -204,7 +204,7 @@ const HexMap = () => {
     sendLog(mensaje);
     
     try {
-      const response = await axios.post(`http://localhost:3000/game/${id}/attack`, {
+      const response = await axios.post(`http://3.19.16.195:3000/game/${id}/attack`, {
         attackerId: user.id,
         attackerTerritoryId: attackingTerritory.territoryId,
         defensorTerritoryId: targetTerritory.territoryId,
@@ -231,7 +231,7 @@ const HexMap = () => {
   const handleMove = async () => {
     if (movingTerritory && destinationTerritory) {
       try {
-        await axios.post(`http://localhost:3000/game/${id}/moveUnits`, {
+        await axios.post(`http://3.19.16.195:3000/game/${id}/moveUnits`, {
           userId: user.id,
           originTerritoryId: movingTerritory.territoryId,
           destinationTerritoryId: destinationTerritory.territoryId,

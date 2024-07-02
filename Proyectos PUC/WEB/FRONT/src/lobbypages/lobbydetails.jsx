@@ -15,10 +15,10 @@ function LobbyDetails() {
   useEffect(() => {
     async function fetchLobbyDetails() {
       try {
-        const lobbyResponse = await axios.get(`http://localhost:3000/lobbys/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+        const lobbyResponse = await axios.get(`http://3.19.16.195:3000/lobbys/${id}`, { headers: { Authorization: `Bearer ${token}` } });
         setLobby(lobbyResponse.data);
 
-        const playersResponse = await axios.get(`http://localhost:3000/lobbys/${id}/users`, { headers: { Authorization: `Bearer ${token}` } });
+        const playersResponse = await axios.get(`http://3.19.16.195:3000/lobbys/${id}/users`, { headers: { Authorization: `Bearer ${token}` } });
         setPlayers(playersResponse.data);
 
         const userInLobby = playersResponse.data.some(player => player.userId === user.id);
@@ -32,9 +32,9 @@ function LobbyDetails() {
 
   const handlePlayerStateChange = async (newState) => {
     try {
-      const response = await axios.patch(`http://localhost:3000/lobbys/${id}/users/${user.id}`, { state: newState }, { headers: { Authorization: `Bearer ${token}` }});
+      const response = await axios.patch(`http://3.19.16.195:3000/lobbys/${id}/users/${user.id}`, { state: newState }, { headers: { Authorization: `Bearer ${token}` }});
       console.log('Estado del jugador actualizado:', response.data);
-      const updatedPlayersResponse = await axios.get(`http://localhost:3000/lobbys/${id}/users`, { headers: { Authorization: `Bearer ${token}` } });
+      const updatedPlayersResponse = await axios.get(`http://3.19.16.195:3000/lobbys/${id}/users`, { headers: { Authorization: `Bearer ${token}` } });
       setPlayers(updatedPlayersResponse.data);
     } catch (error) {
       console.error('Error al cambiar el estado del jugador:', error);
@@ -43,7 +43,7 @@ function LobbyDetails() {
 
   const handleLeaveLobby = async () => {
     try {
-      await axios.delete(`http://localhost:3000/lobbys/${id}/users/${user.id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`http://3.19.16.195:3000/lobbys/${id}/users/${user.id}`, { headers: { Authorization: `Bearer ${token}` } });
       console.log('Usuario eliminado del lobby');
       navigate('/lobbys');
     } catch (error) {
@@ -54,9 +54,9 @@ function LobbyDetails() {
   const handleStartGame = async () => {
     try {
       setError(null);
-      const response = await axios.patch(`http://localhost:3000/lobbys/${id}`,{}, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await axios.patch(`http://3.19.16.195:3000/lobbys/${id}`,{}, { headers: { Authorization: `Bearer ${token}` } });
       console.log('Juego iniciado:', response.data);
-      const map = await axios.get(`http://localhost:3000/game/${lobby.id}`, { headers: { Authorization: `Bearer ${token}` } })
+      const map = await axios.get(`http://3.19.16.195:3000/game/${lobby.id}`, { headers: { Authorization: `Bearer ${token}` } })
       navigate(`/game/${id}`);
     } catch (error) {
       console.error('Error al iniciar el juego:', error);
