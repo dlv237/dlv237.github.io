@@ -1,0 +1,83 @@
+# Query: localhost
+# ContextLines: 1
+
+20 results - 7 files
+
+src\gamepages\game.jsx:
+   69      try {
+   70:       const response = await axios.post(`http://3.19.16.195:3000/game/${id}` ,{} ,{ headers: { Authorization: `Bearer ${token}` } });
+   71:       const turnresponse = await axios.get(`http://3.19.16.195:3000/game/${id}/turn`, { headers: { Authorization: `Bearer ${token}` } });
+   72        setMapData(response.data.map);
+
+  107      try {
+  108:       await axios.patch(`http://3.19.16.195:3000/game/${id}/passTurn`, { headers
+  109          : { Authorization: `Bearer ${token}` } });
+
+  134        try {
+  135:         await axios.patch(`http://3.19.16.195:3000/game/${id}/reforze`, {
+  136            userId: user.id,
+
+  187      try {
+  188:       const response = await axios.post(`http://3.19.16.195:3000/game/${id}/logs`, {
+  189          log: mensaje,
+
+  206      try {
+  207:       const response = await axios.post(`http://3.19.16.195:3000/game/${id}/attack`, {
+  208          attackerId: user.id,
+
+  233        try {
+  234:         await axios.post(`http://3.19.16.195:3000/game/${id}/moveUnits`, {
+  235            userId: user.id,
+
+src\lobbypages\createlobby.jsx:
+  36      try {
+  37:       const response = await axios.post('http://3.19.16.195:3000/lobbys', formData
+  38          , { headers: { Authorization: `Bearer ${token}` } }
+
+src\lobbypages\lobbydetails.jsx:
+  17        try {
+  18:         const lobbyResponse = await axios.get(`http://3.19.16.195:3000/lobbys/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+  19          setLobby(lobbyResponse.data);
+  20  
+  21:         const playersResponse = await axios.get(`http://3.19.16.195:3000/lobbys/${id}/users`, { headers: { Authorization: `Bearer ${token}` } });
+  22          setPlayers(playersResponse.data);
+
+  34      try {
+  35:       const response = await axios.patch(`http://3.19.16.195:3000/lobbys/${id}/users/${user.id}`, { state: newState }, { headers: { Authorization: `Bearer ${token}` }});
+  36        console.log('Estado del jugador actualizado:', response.data);
+  37:       const updatedPlayersResponse = await axios.get(`http://3.19.16.195:3000/lobbys/${id}/users`, { headers: { Authorization: `Bearer ${token}` } });
+  38        setPlayers(updatedPlayersResponse.data);
+
+  45      try {
+  46:       await axios.delete(`http://3.19.16.195:3000/lobbys/${id}/users/${user.id}`, { headers: { Authorization: `Bearer ${token}` } });
+  47        console.log('Usuario eliminado del lobby');
+
+  56        setError(null);
+  57:       const response = await axios.patch(`http://3.19.16.195:3000/lobbys/${id}`,{}, { headers: { Authorization: `Bearer ${token}` } });
+  58        console.log('Juego iniciado:', response.data);
+  59:       const map = await axios.get(`http://3.19.16.195:3000/game/${lobby.id}`, { headers: { Authorization: `Bearer ${token}` } })
+  60        navigate(`/game/${id}`);
+
+src\lobbypages\lobbys.jsx:
+  16        try {
+  17:         const response = await axios.get('http://3.19.16.195:3000/lobbys', { headers: { Authorization: `Bearer ${token}` } });
+  18          setLobbies(response.data);
+
+  28        setError(''); 
+  29:       const response = await axios.post(`http://3.19.16.195:3000/lobbys/${lobbyId}/users`, { userId: user.id, password }
+  30          ,{ headers: { Authorization: `Bearer ${token}` } }
+
+src\userpages\login.jsx:
+  19        console.log(password);
+  20:       const response = await axios.post(`http://3.19.16.195:3000/users/${email}`, {password: password});
+  21        console.log(response.data)
+
+src\userpages\logout.jsx:
+  13          if (user && user.email) {
+  14:           await axios.patch(`http://3.19.16.195:3000/users/${user.email}`, {
+  15              is_logged: false
+
+src\userpages\register.jsx:
+  20        const response = await axios.post(
+  21:         "http://3.19.16.195:3000/users",
+  22          user,

@@ -1,0 +1,8 @@
+.background-image-container {
+    background-image: url('assets/Mechs1.png');
+    background-size: cover;
+    background-position: center;
+    width: 100%; /* Ajusta el ancho según sea necesario */
+    height: 100vh; /* Ajusta la altura según sea necesario */
+    /* Agrega más estilos según necesites */
+  }
