@@ -1,7 +1,0 @@
-room_one:
-  name: Chat Room 1
-  usuario_1: usuario_one
-  usuario_2: usuario_two
-  is_private: true
-  created_at: 2023-1-1
-  updated_at: 2023-2-2
